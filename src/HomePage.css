@@ -1,0 +1,22 @@
+#page-space {
+  min-height: 85vh;
+}
+footer {
+  display: flex;
+  justify-content: center;
+}
+#button-group {
+  padding-top: 5%;
+  display: flex;
+  justify-content: space-evenly;
+}
+#button-right-align {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+}
+#login-container {
+  padding-top: 2%;
+  display: flex;
+  justify-content: center;
+}
