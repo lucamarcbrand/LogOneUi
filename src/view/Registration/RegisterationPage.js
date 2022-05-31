@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Row, Button, Col, Container, Alert } from "react-bootstrap";
 import { updateUserDetailService } from "../../services/UserServices";
+//initial state of application
 const initFormState = {
   userId: "",
   firstName: "",
@@ -34,12 +35,15 @@ export default (props) => {
     Authorization: userDetailsData.authorization,
   };
   const [state, setFormState] = useState(initFormState);
+  // registration form validation state
   const [validated, setValidated] = useState(false);
+  // alert boc component state
   const [alertBox, setAlertBoxVisibility] = useState({
     render: false,
     message: "",
   });
   const [isInvoiceAddressSame, setInvoiceAddressSame] = useState(false);
+  // copy the profile information and set into invoice 
   const handleSameAddressToggle = (checked) => {
     setFormState((prevState) => ({
       ...prevState,
@@ -61,7 +65,7 @@ export default (props) => {
     if (form.checkValidity() === true) {
       let data = state;
       data.userId = userDetailsData.userid;
-
+// updates user infomation by doing backend api call
       updateUserDetailService(defaultHeaders, data)
         .then((result) => {
           setValidated(false);
@@ -85,7 +89,7 @@ export default (props) => {
       message: message,
     }));
   };
-
+// set the profile information received as props to component state
   useEffect(() => {
     setFormState({
       ...initFormState,
@@ -102,6 +106,8 @@ export default (props) => {
         : initFormState.invoiceAddress,
     });
   }, [props.profileInfo]);
+
+// set the changed information in state .. like name change ,,mobile number change
   const onFormEdit = (field, value, nestedObjectName = "root") => {
     if (nestedObjectName === "root") {
       state[field] = value;
@@ -110,6 +116,7 @@ export default (props) => {
     }
     setFormState((prevState) => ({ ...prevState, ...state }));
   };
+  
   return (
     <Container>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>

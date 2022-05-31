@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
-
+//404 age incase no navigation path match
 const Page404 = (props) => {
   return (
     <div>

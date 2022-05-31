@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 
 import { Form } from "react-bootstrap";
-
+// login page component renders email and password input box on screen
 const LoginPage = (props) => {
   const changeEmail = (email) => {
     props.setEmail(email);

@@ -1,5 +1,7 @@
 import React from "react";
 import { Card, ListGroup, ListGroupItem, Button, Form } from "react-bootstrap";
+// product component it displays mask component on Ui
+// it has box,pallets input box and add to cart button
 export const Product = ({
   mask,
   maskName,
@@ -48,16 +50,7 @@ export const Product = ({
           </ListGroupItem>
           {renderShippingCost ? (
             <>
-              {/* <ListGroupItem>
-                <div>Shipping Cost</div> {shippingCost} CHF
-              </ListGroupItem> */}
-              {/* <ListGroupItem>
-                <div>Product Cost </div> {mask.boxes * 25} CHF
-              </ListGroupItem>
-              <ListGroupItem>
-                <div>Total Cost </div>
-                {shippingCost + mask.boxes * 25} CHF
-              </ListGroupItem> */}
+             
             </>
           ) : (
             <ListGroupItem>

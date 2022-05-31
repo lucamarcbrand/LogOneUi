@@ -1,15 +1,12 @@
 import React from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
+
+// registration page to create new user 
+// get email address and password from user and send it to backend 
 export default (props) => {
   const { email, password, password2 } = props;
 
-  // const setUserEmailId = (email) => {
-  //   props.setUserEmailId(email);
-  // };
-  // const setUserPassword = (password) => {
 
-  //     props.setUserPassword(password);
-  // };
   const submitForm = (e) => {
     e.preventDefault();
     console.log("form submitted");

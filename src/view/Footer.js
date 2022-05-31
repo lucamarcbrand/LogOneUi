@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-
+// footer bar of application
 const Footer = () => {
     return (
         <footer>

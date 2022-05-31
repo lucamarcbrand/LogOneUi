@@ -7,6 +7,7 @@ import Yellowmask from "../../static/Resource/yellowMask.png";
 import { Product } from "../Cart/Product";
 import { getInvoiceDetail } from "../../services/paymentService";
 import { UserContext } from "../../Context/userContext";
+// initial cart state
 const initState = {
   pink: {
     boxes: 0,
@@ -29,6 +30,7 @@ const initState = {
     img: Blackmask,
   },
 };
+//initial billing information state
 const initBillingDetails = {
   pinkCost: 0.0,
   blueCost: 0.0,
@@ -66,10 +68,12 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
     yellow: billingDetails.yellowShippingCost,
     black: billingDetails.blackShippingCost,
   };
+
   const defaultHeaders = {
     "Content-Type": "application/json",
     Authorization: userDetailsData.authorization,
   };
+  //change the cart state when boxes or pallets count change
   const onFormEdit = (ele, value, maskName) => {
     if (ele === "boxes" && value <= 9600) {
       state[maskName][ele] = value;
@@ -87,7 +91,10 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
 
   // this function do the get invoice backend call , in the reponse we get shiiping cost ,total product cost
   const orderNow = (showBillingInfo) => {
+    
     if (showBillingInfo) {
+      // when user clicks on confirm order reset the application state
+      // all values in cart will be reset
       setState({
         pink: {
           boxes: 0,
@@ -126,6 +133,8 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
           return;
         }
         payload["destination"] = invoiceAddress.place;
+
+        // fetch invoice and shipping cost from backend
         getInvoiceDetail(defaultHeaders, payload)
           .then((response) => {
             setBillingDetails(response);

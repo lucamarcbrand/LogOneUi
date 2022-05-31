@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Row,  Alert, Card } from "react-bootstrap";
 import { createUserAPI } from "../../services/UserServices";
 
+// intital state of registration component
 const registrationFormInitState = {
   alertBox: {
     render: false,
@@ -13,12 +14,14 @@ const registrationFormInitState = {
   password2: "",
   email: "",
   password: "",
-
   resetForm: false,
 };
+// check if object have not null or undefined value
 const isNullOrUndefined = (field) => {
   return field === null || field === undefined || lodash.trim(field) === "";
 };
+// validates the infromation filled by user is valid or not here
+// email address ,password validtion
 const isFormFiled = (regState) => {
   const blankFields = [];
   const { email, password, password2 } = regState;
@@ -38,6 +41,8 @@ const isFormFiled = (regState) => {
   const isvalid = blankFields.length === 0;
   return [isvalid, blankFields];
 };
+
+// reducer for registration actions 
 const registrationReducer = (regState, action) => {
   switch (action.type) {
     case "SET_USER_EMAIL_ID": {
@@ -65,6 +70,7 @@ const registrationReducer = (regState, action) => {
   }
 };
 
+// container component for registration page 
 export const RegistrationPageContainerComponent = (props) => {
   const [getState, dispatch] = useReducer(
     registrationReducer,

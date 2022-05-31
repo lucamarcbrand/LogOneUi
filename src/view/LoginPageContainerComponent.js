@@ -6,14 +6,14 @@ import LoginPage from "./LoginPage";
 import axios from "axios";
 import { UserContext } from "../Context/userContext";
 import { useHistory } from "react-router-dom";
-
+// Initital state of login page state
 const initialState = {
   userName: "",
   password: "",
   renderAlert: false,
   isLoggedIn: false,
 };
-
+// login page reducer
 function loginReducer(state, action) {
   switch (action.type) {
     case "SET_USER_NAME":
@@ -27,6 +27,7 @@ function loginReducer(state, action) {
       throw state;
   }
 }
+// login page parent component
 export const LoginPageContainerComponent = (props) => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
   const userDetail = useContext(UserContext);
@@ -49,6 +50,7 @@ export const LoginPageContainerComponent = (props) => {
       email: userName,
       password: password,
     };
+    // if username and password available do applicatoin login
     if (userName && password) {
       axios({
         method: "post",
@@ -67,6 +69,7 @@ export const LoginPageContainerComponent = (props) => {
             userDetail.userid = response.headers.userid;
             userDetail.isLoggedInSuccess = true;
             userDetail.renderNavigationBar = true;
+            //once login success redirect to home page
             history.push("/home");
           } else {
             renderAlertBox(true);
