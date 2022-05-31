@@ -1,6 +1,6 @@
 import React, { useContext, Fragment, useState, useEffect } from "react";
 import { Navbar, Col, Image, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
 import { UserContext } from "../Context/userContext";
 import man from "../static/Resource/man2-256.png";
 import { Profile } from "../view/ProfileScreen/Profile";

@@ -3,7 +3,7 @@ import RegisterationForm from "./RegisterationForm.js";
 import * as lodash from "lodash";
 import { Link } from "react-router-dom";
 import { Row,  Alert, Card } from "react-bootstrap";
-import { createUserAPI } from "../../services/Userservices";
+import { createUserAPI } from "../../services/UserServices";
 
 const registrationFormInitState = {
   alertBox: {

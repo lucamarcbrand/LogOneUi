@@ -26,7 +26,6 @@ export const Product = ({
                 required
                 type="number"
                 placeholder="Boxes"
-                min={200}
                 value={mask.boxes}
                 onChange={(e) => onFormEdit("boxes", e.target.value, maskName)}
               />
@@ -63,6 +62,7 @@ export const Product = ({
           ) : (
             <ListGroupItem>
               <Button
+                disabled={mask.boxes < 200}
                 variant="outline-primary"
                 onClick={(e) => addProduct(maskName)}
               >

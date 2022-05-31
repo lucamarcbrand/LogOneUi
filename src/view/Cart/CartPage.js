@@ -9,23 +9,23 @@ import { getInvoiceDetail } from "../../services/paymentService";
 import { UserContext } from "../../Context/userContext";
 const initState = {
   pink: {
-    boxes: 200,
-    pallets: 1,
+    boxes: 0,
+    pallets: 0,
     img: Pinkkmask,
   },
   blue: {
-    boxes: 200,
-    pallets: 1,
+    boxes: 0,
+    pallets: 0,
     img: Bluemask,
   },
   yellow: {
-    boxes: 200,
-    pallets: 1,
+    boxes: 0,
+    pallets: 0,
     img: Yellowmask,
   },
   black: {
-    boxes: 200,
-    pallets: 1,
+    boxes: 0,
+    pallets: 0,
     img: Blackmask,
   },
 };
@@ -65,7 +65,7 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
     Authorization: userDetailsData.authorization,
   };
   const onFormEdit = (ele, value, maskName) => {
-    if (ele === "boxes" && value >= 200 && value <= 9600) {
+    if (ele === "boxes" && value <= 9600) {
       state[maskName][ele] = value;
       state[maskName]["pallets"] = Math.ceil(value / 800);
     } else if (ele === "pallets" && value >= 1 && value <= 12) {
@@ -80,10 +80,10 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
   };
   const orderNow = (showBillingInfo) => {
     if (showBillingInfo) {
-      setState(initState);
+      setState({ ...initState });
       setCart([]);
       renderBillingInfo(false);
-      setBillingDetails(initBillingDetails);
+      setBillingDetails({ ...initBillingDetails });
     } else {
       const payload = {};
       let palletCount = 0;
@@ -93,7 +93,7 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
           palletCount = palletCount + +state[mask]["pallets"];
         });
         setPalletCount(palletCount);
-        if (palletCount > 12) { 
+        if (palletCount > 12) {
           return;
         }
         payload["destination"] = invoiceAddress.place;
@@ -111,7 +111,7 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
     }
   };
   const addProduct = (product) => {
-    if (!cart.includes(product)) {
+    if (!cart.includes(product) && state[product].boxes > 0) {
       cart.push(product);
       setCart([...cart]);
     }

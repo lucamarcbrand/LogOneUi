@@ -152,7 +152,7 @@ export default (props) => {
             <Form.Label>Mobile Number</Form.Label>
             <Form.Control
               required
-              type="number"
+              type="text"
               placeholder="Mobile Number"
               value={state.mobileNumber}
               onChange={(e) =>
@@ -262,7 +262,7 @@ export default (props) => {
                 <Form.Label>Mobile Number</Form.Label>
                 <Form.Control
                   required
-                  type="number"
+                  type="text"
                   placeholder="Mobile Number"
                   value={state.invoiceAddress.mobileNumber}
                   onChange={(e) =>
