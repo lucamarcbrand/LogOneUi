@@ -23,6 +23,9 @@ const initFormState = {
   },
 };
 import { UserContext } from "../../Context/userContext";
+
+// this component is for registeration of user profile
+// we collect all user profile information through this component
 export default (props) => {
   const userDetailsData = useContext(UserContext);
 
@@ -52,7 +55,7 @@ export default (props) => {
 
     setInvoiceAddressSame(checked);
   };
-
+// once user fills all details we submit this information to backend server via -->updateUserDetailService
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
@@ -74,7 +77,7 @@ export default (props) => {
     setValidated(true);
     event.preventDefault();
   };
-
+// to close alert message displayed on scrren
   const closeAlertBox = (render, message) => {
     setAlertBoxVisibility((prevState) => ({
       ...prevState,
@@ -82,6 +85,7 @@ export default (props) => {
       message: message,
     }));
   };
+
   useEffect(() => {
     setFormState({
       ...initFormState,

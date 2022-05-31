@@ -1,6 +1,8 @@
 import React,{useState} from "react";
 import {Offcanvas} from 'react-bootstrap'
 import RegisterationPage from "../Registration/RegisterationPage";
+
+//profile component it show profile information on offcanvas 
 export const Profile = ({show,handleClose,profileInfo,setProfile}) => {
 
   const handleProfileClose = () => handleClose();

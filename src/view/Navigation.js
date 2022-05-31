@@ -6,7 +6,7 @@ import man from "../static/Resource/man2-256.png";
 import { Profile } from "../view/ProfileScreen/Profile";
 import { getUserDetailByUserIdAPI } from "../services/UserServices";
 const profilePicStyle = { height: "25px", width: "25px" };
-
+// top navigation bar component
 const Navigation = ({ Component }) => {
   const userDetailsData = useContext(UserContext);
   const [profile, setProfile] = useState({});
@@ -21,13 +21,15 @@ const Navigation = ({ Component }) => {
       fetchUserDetails(userDetailsData);
     }
   }, []);
+
+  //fetched the user profile information
   const fetchUserDetails = (userDetailsData) => {
     const headers = {
       "Content-type": "application/json",
       Authorization: userDetailsData.authorization,
       accept: "application/json",
     };
-
+// api call to get user profile
     getUserDetailByUserIdAPI(userDetailsData.userid, headers)
       .then((userDetails) => {
         if (userDetails) {

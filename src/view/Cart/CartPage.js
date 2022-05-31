@@ -42,16 +42,22 @@ const initBillingDetails = {
   shippingCost: 0.0,
   totalCost: 0.0,
 };
+
+//currency formater function
 const money = new Intl.NumberFormat("de-CH", {
   style: "currency",
   currency: "CHF",
 });
+
+// cart component : it displays Mask blue,blck,pink,yellow on screen
 export const CartPage = ({ invoiceAddress, showProfile }) => {
-  const [state, setState] = useState(initState);
+  const [state, setState] = useState({ ...initState });
   const [cart, setCart] = useState([]);
   const [showBillingInfo, renderBillingInfo] = useState(false);
   const [palletsCount, setPalletCount] = useState(0);
-  const [billingDetails, setBillingDetails] = useState(initBillingDetails);
+  const [billingDetails, setBillingDetails] = useState({
+    ...initBillingDetails,
+  });
   const userDetailsData = useContext(UserContext);
 
   const shippingCost = {
@@ -78,9 +84,32 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
       ...state[maskName],
     }));
   };
+
+  // this function do the get invoice backend call , in the reponse we get shiiping cost ,total product cost
   const orderNow = (showBillingInfo) => {
     if (showBillingInfo) {
-      setState({ ...initState });
+      setState({
+        pink: {
+          boxes: 0,
+          pallets: 0,
+          img: Pinkkmask,
+        },
+        blue: {
+          boxes: 0,
+          pallets: 0,
+          img: Bluemask,
+        },
+        yellow: {
+          boxes: 0,
+          pallets: 0,
+          img: Yellowmask,
+        },
+        black: {
+          boxes: 0,
+          pallets: 0,
+          img: Blackmask,
+        },
+      });
       setCart([]);
       renderBillingInfo(false);
       setBillingDetails({ ...initBillingDetails });
@@ -110,18 +139,22 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
       }
     }
   };
+  // this function adds product in cart
   const addProduct = (product) => {
     if (!cart.includes(product) && state[product].boxes > 0) {
       cart.push(product);
       setCart([...cart]);
     }
   };
-  const removeProduct = (product) => {
+
+  // this function removes product from cart on click of delete icon
+  const removeProduct = (e, product) => {
     setCart(cart.filter((p) => p !== product));
     if (cart.length === 1) {
       setBillingDetails(initBillingDetails);
       renderBillingInfo(false);
     }
+    e.preventDefault();
   };
   return (
     <div>
@@ -166,7 +199,10 @@ export const CartPage = ({ invoiceAddress, showProfile }) => {
                     <span>{money.format(state[mask].boxes * 25)}</span>
                   </div>
                   <div style={{ minWidth: "20px" }}>
-                    <Button variant="Link" onClick={(e) => removeProduct(mask)}>
+                    <Button
+                      variant="Link"
+                      onClick={(e) => removeProduct(e, mask)}
+                    >
                       <span style={{ color: "#0d6efd" }}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

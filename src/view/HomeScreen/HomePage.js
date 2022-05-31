@@ -35,7 +35,8 @@ function reducer(state, action) {
       return state;
   }
 }
-
+//home page component
+//this is parent component and  manages masks  and shopping card component
 const HomePage = (props) => {
   const userDetailsData = useContext(UserContext);
   const [homeState, dispatch] = useReducer(reducer, homePageInitialState);
@@ -63,7 +64,7 @@ const HomePage = (props) => {
                 <h6 className="center-position top-space-25">Info: </h6>
                 <ul>50 pcs. per Box | 800 Boxes per palett</ul>
                 <ul>minimum order quantity - 200 boxes per palett</ul>
-                <ul>maximum order quantity - 9600 boxes or 12 palett</ul>
+                <ul>maximum order quantity - 9600 boxes or 12 pallets</ul>
               </div>
             </div>
           </div>
